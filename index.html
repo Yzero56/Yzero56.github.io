@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <title>오늘 뭐 먹지?</title>
+</head>
+<body>
+    <header>
+        <ul>
+            <li class="dropdown">
+                <div class="dropdown-menu">🗂️ 카테고리</div>
+                <div class="dropdown-content">
+                    <a href="#">🍚 한식</a>
+                    <a href="#">🥢 중식</a>
+                    <a href="#">🍝 양식</a>
+                    <a href="#">🍱 일식</a>
+                    <a href="#">🥘 분식</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <div class="dropdown-menu">⏰ 시간대별 추천메뉴</div>
+                <div class="dropdown-content">
+                    <a href="#">🌅 아침</a>
+                    <a href="#">☀️ 점심</a>
+                    <a href="#">🌕 저녁</a>
+                    <a href="#">🌑 야식</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <div class="dropdown-menu">📍 위치 기반 메뉴</div>
+                <div class="dropdown-content">
+                    <a href="#">🏙️ 서울</a>
+                    <a href="#">🌊 부산</a>
+                    <a href="#">⛰️ 강원도</a>
+                    <a href="#">🏝️ 제주도</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <div class="dropdown-menu">🧾 찜한 메뉴/최근 본 메뉴</div>
+                <div class="dropdown-content">
+                    <a href="#">📌 찜한 메뉴</a>
+                    <a href="#">최근에 본 메뉴</a>
+                </div>
+            </li>
+            <li class="user">
+                <i class="ri-menu-line"></i>
+                <div class="dropdown-content">
+                    <a href="#">로그인하기</a>
+                    <a href="#">회원가입</a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <div id="food">
+            <h1 class="title">오늘.. 뭐 먹지?</h1>
+            <button id="title-button">추천리스트 보기</button>
+            <ol id="random-picker"></ol>
+        </div>
+    </main>
+    <script>
+        //메뉴 3개 랜덤 추천
+        const menu = ["🍕 피자", "🥗 샐러드", "🍚 비빔밥", "🍗 치킨", "🍔 햄버거", "🥪 토스트", "🍜 라면", "🍛 카레", "🍲 된장찌개", "🥘 떡볶이"];
+        const btnRandom = document.querySelector("#title-button");
+        const result = document.getElementById('random-picker');
+
+        btnRandom.onclick = randomMenu;
+
+        function randomMenu() {
+            result.innerHTML = ""; //이전 결과 초기화 
+            const randomArray = _.shuffle(menu).slice(0, 3);
+
+            randomArray.forEach(element => { 
+                const listMenu = document.createElement("li");
+                listMenu.textContent = element;
+                listMenu.classList.add("random-item"); //class 추가 
+                result.appendChild(listMenu);
+            });
+        }
+    </script>
+</body>
+</html>
